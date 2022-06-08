@@ -1,6 +1,8 @@
 package me.light.mapper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -22,6 +24,7 @@ public class BoardMapperTest extends AppTest {
 
 	@Autowired
 	private BoardMapper mapper;
+
 	@Autowired
 	private DataSource dataSource;
 
@@ -58,6 +61,30 @@ public class BoardMapperTest extends AppTest {
 		assertEquals(board.getTitle(), getBoard.getTitle());
 		assertEquals(board.getContents(), getBoard.getContents());
 		assertEquals(board.getWriter(), getBoard.getWriter());
+		assertEquals(board.getBno(), getBoard.getBno());
 	}
 
+	@Test
+	public void updateTest() {
+		Board board = mapper.get(1L);
+		board.setTitle("제목수정함");
+		board.setContents("내용수정함");
+		mapper.update(board);
+		assertEquals("제목수정함", board.getTitle());
+		assertEquals("내용수정함", board.getContents());
+		assertEquals("테스트", board.getWriter());
+	}
+
+	@Test
+	public void deleteTest() {
+		mapper.delete(1L);
+		mapper.delete(2L);
+		Board board1 = mapper.get(1L);
+		Board board2 = mapper.get(2L);
+		Board board3 = mapper.get(3L);
+		assertNull(board1);
+		assertNull(board2);
+		assertNotNull(board3);
+
+	}
 }

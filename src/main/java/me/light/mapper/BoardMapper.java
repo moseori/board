@@ -13,6 +13,6 @@ public interface BoardMapper {
 
 	void update(Board board);
 
-	void delete(Board board);
+	void delete(Long bno);
 
 }
