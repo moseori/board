@@ -6,4 +6,28 @@
 	<select id="getList" resultType="me.light.model.Board">
 		select * from board_tbl
 	</select>
+	
+	<select id="get" resultType="me.light.model.Board">
+		select * from board_tbl 
+		where bno=#{bno}
+	</select>
+
+	<insert id="insert">
+		insert into 
+		board_tbl(title,contents,writer) 
+		values(#{title},#{contents},#{writer});
+	</insert>
+
+	<update id="update">
+		update board_tbl set
+		title=#{title},
+		contents=#{contents}, 
+		updateDate=now()
+		where bno=#{bno}
+	</update>
+
+	<delete id="delete">
+		delete from board_tbl 
+		where bno=#{bno}
+	</delete>
 </mapper>

@@ -10,5 +10,4 @@ import me.light.config.RootConfig;
 @ContextConfiguration(classes = { RootConfig.class })
 public class AppTest {
 
-
 }

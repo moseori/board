@@ -16,9 +16,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @MapperScan("me.light.mapper")
-@PropertySources({
-	@PropertySource("classpath:datasource/jdbc.properties")	
-})
+@PropertySources({ @PropertySource("classpath:datasource/jdbc.properties") })
 public class RootConfig {
 
 	@Value("${jdbc.driverClassName}")
