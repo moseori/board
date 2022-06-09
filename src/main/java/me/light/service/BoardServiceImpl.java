@@ -60,4 +60,9 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.insert(board);
 		
 	}
+
+	@Override
+	public int totalCount() {
+		return boardMapper.totalCount();
+	}
 }
