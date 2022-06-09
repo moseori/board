@@ -10,10 +10,10 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <header>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="${contextPath}/board/list">Home</a>
+		<a class="navbar-brand" href="${contextPath}/">Home</a>
 
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+			<li class="nav-item"><a class="nav-link" href="${contextPath}/board/list">게시판</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Link 2</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Link 3</a></li>
 		</ul>
