@@ -16,4 +16,8 @@ public interface BoardService {
 	void delete(Long bno);
 
 	void modify(Board board);
+
+	void remove(Long bno);
+
+	void register(Board board);
 }

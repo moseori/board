@@ -44,7 +44,19 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void modify(Board board) {
-		boardMapper.modify(board);
+		boardMapper.update(board);
 
+	}
+
+	@Override
+	public void remove(Long bno) {
+		boardMapper.delete(bno);
+		
+	}
+
+	@Override
+	public void register(Board board) {
+		boardMapper.insert(board);
+		
 	}
 }

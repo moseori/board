@@ -27,13 +27,18 @@
 <script>
 	$(function() {
 		let getForm = $("#getForm");
-		$('#getForm .list').on('click', function() {
+		$('#getForm .list').on('click', function() { //목록
 			getForm.empty();
 			getForm.attr("action", "list");
 			getForm.submit();
 		})
-		$('#getForm .modify').on('click', function() {
+		$('#getForm .modify').on('click', function() { //수정페이지
 			getForm.attr("action", "modify");
+			getForm.submit();
+		})
+		$("#getForm .remove").on('click',function(){//삭제처리
+			getForm.attr("method","post");
+			getForm.attr("action","remove");
 			getForm.submit();
 		})
 	})
