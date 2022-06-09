@@ -3,7 +3,7 @@
 <div class="container">
 	<form action="register" method="post">
 		제목 : <input type="text" name="title"><br> 
-		내용 : <textarea rows="" cols="" name="contents"></textarea> <br>
+		내용 : <textarea rows="10" cols="50" name="contents"></textarea> <br>
 		작성자 : <input type="text" name="writer"> <br>
 		<button>글쓰기</button>
 	</form>

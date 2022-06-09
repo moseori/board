@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import me.light.mapper.BoardMapper;
 import me.light.model.Board;
+import me.light.model.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -15,8 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper boardMapper;
 
 	@Override
-	public List<Board> getList() {
-		return boardMapper.getList();
+	public List<Board> getList(Criteria criteria) {
+		return boardMapper.getList(criteria);
 	}
 
 	@Override

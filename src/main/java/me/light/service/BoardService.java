@@ -3,9 +3,10 @@ package me.light.service;
 import java.util.List;
 
 import me.light.model.Board;
+import me.light.model.Criteria;
 
 public interface BoardService {
-	List<Board> getList();
+	List<Board> getList(Criteria criteria);
 
 	Board get(Long bno);
 
