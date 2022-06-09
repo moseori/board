@@ -34,6 +34,9 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+				<a href="list?page=${pageNum}">[${pageNum}]</a>
+		</c:forEach>
 	</div>
 	<%@ include file="../layout/footer.jsp"%>
 </body>
