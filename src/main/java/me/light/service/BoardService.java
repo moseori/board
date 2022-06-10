@@ -22,5 +22,5 @@ public interface BoardService {
 
 	void register(Board board);
 
-	int totalCount();
+	int totalCount(Criteria criteria);
 }
