@@ -9,6 +9,7 @@
 	<%@ include file="../layout/header.jsp"%>
 	<div class="container">
 		<div class="listData">
+			<input type="hidden" name="bno" id="bno" value="">
 			<input type="hidden" name="page" id="page" value="${pageMaker.criteria.page}"> 
 			<input type="hidden" name="type" id="type" value="${pageMaker.criteria.type}"> 
 			<input type="hidden" name="keyword" id="keyword" value="${pageMaker.criteria.keyword}">
@@ -39,14 +40,16 @@
 			<c:forEach items="${list}" var="b">
 				<tr>
 					<td>${b.bno}</td>
-					<td><a href="get?bno=${b.bno}">${b.title}</a></td>
+					<td><a href="${b.bno}" class="get">${b.title}</a></td>
 					<td>${b.writer}</td>
-					<td><fmt:parseDate var="regDate" value="${b.regDate}"
-							pattern="yyyy-MM-dd'T'HH:mm:ss" /> <fmt:formatDate
-							value="${regDate}" pattern="yyyy년MM월dd일 HH시mm분" /></td>
-					<td><fmt:parseDate var="updateDate" value="${b.updateDate}"
-							pattern="yyyy-MM-dd'T'HH:mm:ss" /> <fmt:formatDate
-							value="${updateDate}" pattern="yyyy년MM월dd일 HH시mm분" /></td>
+					<td>
+						<fmt:parseDate var="regDate" value="${b.regDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" /> 
+						<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일 HH시mm분" />
+					</td>
+					<td>
+						<fmt:parseDate var="updateDate" value="${b.updateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" /> 
+						<fmt:formatDate value="${updateDate}" pattern="yyyy년MM월dd일 HH시mm분" />
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -56,7 +59,7 @@
 			</c:if>
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
 				var="pageNum">
-				<a href="${pageNum}">[${pageNum}]</a>
+				<a href="${pageNum}" class="${pageMaker.criteria.page == pageNum ?'on':''}">[${pageNum}]</a>
 			</c:forEach>
 			<c:if test="${pageMaker.next}">
 				<a href="${pageMaker.endPage + 1}">[다음페이지]</a>
@@ -71,10 +74,26 @@
 			$('.pagination a').on('click', function(e) {
 				e.preventDefault();
 				$('.listData').find('#page').val($(this).attr('href'));
+				if (listForm.find('input[name="keyword"]').val() == '') {
+					listForm.find('input[name="keyword"]').remove();
+					listForm.find('select[name="type"]').remove();
+				}
 				listForm.append($('#page'));
 				listForm.submit();
-			})
+			});
+			$('.get').on('click', function(e) {
+				e.preventDefault();
+				let bno = $(this).attr('href');
+				$('#bno').val(bno);
+				listForm.append($('#bno'));
+				listForm.append($('#page'));
+				listForm.attr("action", "get");
+				listForm.submit();
+			});
 		})
 	</script>
+	<style>
+	.on { font-weight: 700; color: red; }
+	</style>
 </body>
 </html>
