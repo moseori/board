@@ -4,7 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="me.light.mapper.BoardMapper">
 	<select id="getList" resultType="me.light.model.Board">
-		select * from board_tbl limit #{pageStart},#{perPageNum}
+		select * from board_tbl
+		<where>
+			<trim prefixOverrides="OR">
+				<foreach collection="typeCollection">
+					<trim prefix="OR">
+						<choose>
+							<when test="type=='T'.toString()">
+								title like concat('%',#{keyword},'%')
+							</when>
+							<when test="type=='C'.toString()">
+								contents like concat('%',#{keyword},'%')
+							</when>
+							<when test="type=='W'.toString()">
+								writer like concat('%',#{keyword},'%')
+							</when>
+						</choose>
+
+					</trim>
+				</foreach>
+			</trim>
+
+		</where>
+		order by bno desc
+		limit #{pageStart},#{perPageNum}
 	</select>
 	
 	<select id="totalCount" resultType="int">
