@@ -22,7 +22,7 @@
 			<p>${board.contents}</p>
 		</div>
 		<button class="btn btn-warning modify">수정</button>
-		<button class="btn btn-danger">삭제</button>
+		<button class="btn btn-danger remove">삭제</button>
 		<button class="btn btn-primary list">목록</button>
 	</form>
 </div>
