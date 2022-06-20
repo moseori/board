@@ -2,17 +2,18 @@ package me.light.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 import me.light.mapper.ReplyMapper;
 import me.light.model.Criteria;
 import me.light.model.ReplyVO;
 
 @Service
-@AllArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
 	
+	@Setter(onMethod_ = @Autowired)
 	private ReplyMapper mapper;
 	
 	@Override
