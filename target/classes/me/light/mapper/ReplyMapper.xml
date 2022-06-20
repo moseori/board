@@ -6,18 +6,24 @@
 	<select id="getListAll" resultType="me.light.model.ReplyVO">
 		select * from reply_tbl
 	</select>
+	<select id="getListWithPaging" resultType="me.light.model.ReplyVO">
+		select * from reply_tbl where bno=#{bno}
+		order by rno desc
+	</select>
 	<insert id="insert">
-	insert into reply_tbl(bno,reply,replyer) values(#{bno},#{reply},#{replyer})
+		insert into reply_tbl(bno,reply,replyer)
+		values(#{bno},#{reply},#{replyer})
 	</insert>
 	<select id="read" resultType="me.light.model.ReplyVO">
-		select * from reply_tbl where rno=#{rno}
+		select * from reply_tbl where
+		rno=#{rno}
 	</select>
 	<delete id="delete">
-	delete from reply_tbl where rno=#{rno}
+		delete from reply_tbl where rno=#{rno}
 	</delete>
 	<update id="update">
-	update reply_tbl
-	set reply=#{reply}, updateDate=now()
-	where rno=#{rno}
+		update reply_tbl
+		set reply=#{reply}, updateDate=now()
+		where rno=#{rno}
 	</update>
 </mapper>
