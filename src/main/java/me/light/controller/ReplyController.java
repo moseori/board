@@ -48,10 +48,11 @@ public class ReplyController {
 		return service.remove(rno) == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
 	@PutMapping(value = "/{rno}")
-	public ResponseEntity<String> modify(@RequestBody ReplyVO vo,@PathVariable Long rno){
+	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable Long rno) {
 		vo.setRno(rno);
-		return service.modify(vo)==1? new ResponseEntity<String>("success", HttpStatus.OK)
+		return service.modify(vo) == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
