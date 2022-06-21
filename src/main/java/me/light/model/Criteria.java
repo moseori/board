@@ -19,6 +19,11 @@ public class Criteria {
 		this.perPageNum = 10;
 	}
 
+	public Criteria(int page, int perPageNum) {
+		this.page = page;
+		this.perPageNum = perPageNum;
+	}
+
 	public int getPageStart() {
 		return (this.page - 1) * perPageNum;
 	}
@@ -26,4 +31,5 @@ public class Criteria {
 	public String[] getTypeCollection() {
 		return type != null ? type.split("") : new String[] {};
 	}
+
 }

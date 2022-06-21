@@ -1,6 +1,6 @@
 package me.light.model;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +18,7 @@ public class ReplyVO {
 	private Long bno;
 	private String reply;
 	private String replyer;
-	private LocalDateTime regDate;
-	private LocalDateTime updateDate;
+	private Date regDate;
+	private Date updateDate;
 
 }
