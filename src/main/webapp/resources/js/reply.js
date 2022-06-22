@@ -17,7 +17,6 @@ let replyService = (function() {
 				}
 			}
 		});
-
 	}
 
 	//댓글목록
@@ -35,9 +34,48 @@ let replyService = (function() {
 		});
 	}
 
+	//댓글삭제
+	function remove(rno, callback, error) {
+		$.ajax({
+			type: "delete",
+			url: contextPath + "/replies/" + rno,
+			sucess: function(result, status, xhr) {
+				if (callback) {
+					callback(result);
+				}
+			},
+			error: function(xhr, status, er) {
+				if (error) {
+					error(er);
+				}
+			}
+		});
+	}// deldte end
+
+	function update(reply, callback, error) {
+		$.ajax({
+			type: "put",
+			url: contextPath + "/replies/" + reply.rno,
+			data: JSON.stringify(reply),
+			contentType: 'application/json;charset=utf-8',
+			sucess: function(result, status, xhr) {
+				if (callback) {
+					callback(result);
+				}
+			},
+			error: function(xhr, status, er) {
+				if (error) {
+					error(er);
+				}
+			}
+		});
+	}// update end
+
 	return {
 		add: add,
-		getList: getList
+		getList: getList,
+		remove: remove,
+		update: update
 	};
 })();
 

@@ -1,22 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 <div class="container">
 	<div class="getData">
 		<input type="hidden" name="page" id="page" value="${param.page}">
 		<input type="hidden" name="type" id="type" value="${param.type}">
-		<input type="hidden" name="keyword" id="keyword" value="${param.keyword}">
+		<input type="hidden" name="keyword" id="keyword"
+			value="${param.keyword}">
 	</div>
 	<form id="getForm">
-		<input type="hidden" name="bno" value="${board.bno}"> 
+		<input type="hidden" name="bno" value="${board.bno}">
 		<div>
 			<p>${board.title}</p>
 			<p>작성자 : ${board.writer}</p>
 			<p>
 				등록일 :
-				<fmt:parseDate var="regDate" value="${board.regDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" />
+				<fmt:parseDate var="regDate" value="${board.regDate}"
+					pattern="yyyy-MM-dd'T'HH:mm:ss" />
 				<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일 HH시mm분" />
 				수정일 :
-				<fmt:parseDate var="updateDate" value="${board.updateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" />
+				<fmt:parseDate var="updateDate" value="${board.updateDate}"
+					pattern="yyyy-MM-dd'T'HH:mm:ss" />
 				<fmt:formatDate value="${updateDate}" pattern="yyyy년MM월dd일 HH시mm분" />
 			</p>
 			<p>${board.contents}</p>
@@ -56,6 +60,30 @@
 				console.log(reply)
 			}
 		})
+	})
+	
+	$(function(){
+		//수정테스트
+		function updateTest(){
+		replyService.update({
+			rno:13,
+			bno:1,
+			reply:"댓글 update"
+		},function(result){
+			alert(result)
+		})
+		}
+		
+		//delete 테스트
+		function deleteTest(){
+			replyService.remove(16, function(result){
+				alert(result);
+			},function(){
+				alert('실패')
+			})
+			
+		}
+		//deleteTest();
 	})
 
 </script>
