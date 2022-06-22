@@ -20,7 +20,25 @@ let replyService = (function() {
 
 	}
 
-	return { add: add };
+	//댓글목록
+	function getList(param, callback, error) {
+		let bno = param.bno;
+		let page = param.page || 1;
+
+		let url = contextPath + '/replies/page/' + bno + '/' + page;
+		let success = function(data) {
+			if (callback) { callback(data) }
+		}
+
+		$.getJSON(url, success).fail(function(xhr, status, err) {
+			if (error) { error(); }
+		});
+	}
+
+	return {
+		add: add,
+		getList: getList
+	};
 })();
 
 console.log(replyService);

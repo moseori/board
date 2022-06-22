@@ -47,20 +47,16 @@
 			getForm.submit();
 		})
 	})
-	
-	//댓글등록 테스트
-	$(function() {
-		let bnoValue = $('input[name="bno"]').val();
-		let reply = {
-			bno : bnoValue,
-			reply : "ajax 댓글 등록 태스트",
-			replyer : "테스터"
-		};
-		let callback = function(result) {
-			alert("결과 : " + result);
-		}
 
-		replyService.add(reply, callback)
+	$(function(){
+		let bnoValue=$('input[name="bno"]').val();
+		
+		replyService.getList({bno:bnoValue},function(list){
+			for(let reply of list){
+				console.log(reply)
+			}
+		})
 	})
+
 </script>
 <%@ include file="../layout/footer.jsp"%>
