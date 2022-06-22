@@ -29,6 +29,29 @@
 		<button class="btn btn-danger remove">삭제</button>
 		<button class="btn btn-primary list">목록</button>
 	</form>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel paner-default">
+				<div class="panel-heading">
+					<h4>댓글을 달아주세요</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="chat">
+						<li data-rno='1'>
+							<div>
+								<div class='header'>
+									<strong>홍길동</strong> 
+									<small class='pull-right text-muted'>2022-02-22</small>
+								</div>
+								<p>댓글내용.....</p>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script>
 	$(function() {
@@ -60,6 +83,24 @@
 				console.log(reply)
 			}
 		})
+	})
+	
+	$(function(){
+		let bnoValue='${board.bno}'
+		let replyUL=$('.chat');
+		function showList(page){
+			replyService.getList({bno:bnoValue,page:page},function(list){
+				let str ="";
+				for(let reply of list){
+			    str+="<li data-rno='"+reply.rno+"'><div><div class='header'>";
+			    str+="<strong class='primary-font'>"+reply.replyer+"</strong>";
+			    str+="<small class='pull-right text-muted'>"+reply.regDate+"</small>";
+			    str+="</div><p>"+reply.reply+"</p></div></li>"
+				}
+				replyUL.html(str);
+			});
+		}
+		showList(1);
 	})
 	
 	$(function(){
