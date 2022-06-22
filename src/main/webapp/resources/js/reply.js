@@ -75,7 +75,7 @@ let replyService = (function() {
 		add: add,
 		getList: getList,
 		remove: remove,
-		update: update
+		update: update,
 	};
 })();
 

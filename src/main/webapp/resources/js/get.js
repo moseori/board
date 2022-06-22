@@ -11,7 +11,7 @@ $(function() {
 						<div>
 							<div class="header">
 								<strong class="primary-font">${reply.replyer}</strong>
-								<small class="pull-right text-muted">${reply.regDate}</small>
+								<small class="pull-right text-muted">${displayTime(reply.regDate)}</small>
 							</div>
 							<p>${reply.reply}</p>
 						</div>
@@ -21,4 +21,11 @@ $(function() {
 		});
 	}
 	showList(1);
+	
+	function displayTime(timeValue){
+		//console.log(timeValue);
+		let timeArr=JSON.stringify(timeValue).substr(1).split(",");
+		//console.log(timeArr);
+		return `${timeArr[0]}년 ${timeArr[1]}월 ${timeArr[2]}일`;
+	}
 })
