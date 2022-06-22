@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
+<script src="${contextPath }/resources/js/get.js"></script>
 <div class="container">
 	<div class="getData">
 		<input type="hidden" name="page" id="page" value="${param.page}">
@@ -83,24 +84,6 @@
 				console.log(reply)
 			}
 		})
-	})
-	
-	$(function(){
-		let bnoValue='${board.bno}'
-		let replyUL=$('.chat');
-		function showList(page){
-			replyService.getList({bno:bnoValue,page:page},function(list){
-				let str ="";
-				for(let reply of list){
-			    str+="<li data-rno='"+reply.rno+"'><div><div class='header'>";
-			    str+="<strong class='primary-font'>"+reply.replyer+"</strong>";
-			    str+="<small class='pull-right text-muted'>"+reply.regDate+"</small>";
-			    str+="</div><p>"+reply.reply+"</p></div></li>"
-				}
-				replyUL.html(str);
-			});
-		}
-		showList(1);
 	})
 	
 	$(function(){
