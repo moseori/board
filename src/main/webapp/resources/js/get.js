@@ -45,9 +45,11 @@ $(function() {
 
 	//댓글동록 모달창
 	$('#addReplyBtn').click(function() {
+		modal.find('input').val('')
 		modalInputReplyDate.closest('div').hide()
 		modalModifyBtn.hide()
 		modalremoveBtn.hide()
+		modalRegisterBtn.show()
 	})
 
 
@@ -71,7 +73,17 @@ $(function() {
 		let rno=$(this).data('rno');
 		
 		replyService.get(rno, function(reply){
-			console.log(reply)
+			console.log(reply);
+			modalInputReply.val(reply.reply);
+			modalInputReplyer.val(reply.replyer);
+			modalInputReplyDate.val(displayTime(reply.updateDate)).attr("readonly","readonly");
+			modal.data("rno",reply.rno);
+			
+			modal.find("button[id='modalCloseBtn']").hide();
+			modalModifyBtn.show();
+			modalremoveBtn.show();
+			modalRegisterBtn.hide();
+			modal.modal("show");
 		})
 	})
 })
