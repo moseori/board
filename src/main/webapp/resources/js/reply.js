@@ -70,12 +70,21 @@ let replyService = (function() {
 			}
 		});
 	}// update end
+	
+	function get(rno, callback, error){
+		$.get(contextPath+"/replies/"+rno, function(result){
+			if(callback) callback(result)
+		}).fail(function(xhr, status, err){
+			if(error) error(err)
+		})
+	}
 
 	return {
 		add: add,
 		getList: getList,
 		remove: remove,
 		update: update,
+		get:get //*주의*
 	};
 })();
 

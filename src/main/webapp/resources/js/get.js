@@ -67,7 +67,11 @@ $(function() {
 	
 	$('.chat').on('click','li',function(){
 		//alert('클릭'+$(this).data('rno'));
+		//alert(rno);
 		let rno=$(this).data('rno');
-		alert(rno);
+		
+		replyService.get(rno, function(reply){
+			console.log(reply)
+		})
 	})
 })
