@@ -21,11 +21,45 @@ $(function() {
 		});
 	}
 	showList(1);
-	
+		
 	function displayTime(timeValue){
 		//console.log(timeValue);
 		let timeArr=JSON.stringify(timeValue).substr(1).split(",");
 		//console.log(timeArr);
 		return `${timeArr[0]}년 ${timeArr[1]}월 ${timeArr[2]}일`;
 	}
+	
+	//모달창
+	let bno = $('input[name="bno"]').val();
+	let modal = $('.modal');
+	let modalInputReply = modal.find('input[name="reply"]');
+	let modalInputReplyer = modal.find('input[name="replyer"]');
+	let modalInputReplyDate = modal.find('input[name="regDate"]');
+
+	let modalModifyBtn = $('#modalModifyBtn')
+	let modalremoveBtn = $('#modalremoveBtn')
+	let modalRegisterBtn = $('#modalRegisterBtn')
+	let modalCloseBtn = $('#modalCloseBtn')
+
+	//댓글동록 모달창
+	$('#addReplyBtn').click(function() {
+		modalInputReplyDate.closest('div').hide()
+		$('#modalModifyBtn').hide()
+		$('#modalremoveBtn').hide()
+	})
+
+
+	//모달이벤트 처리
+	modalRegisterBtn.on('click', function() {
+		let reply = {
+			reply: modalInputReply.val(),
+			replyer: modalInputReplyer.val(),
+			bno: bno
+		}
+		replyService.add(reply, function(result) {
+			alert(result)
+		})
+		modal.modal('hide');
+		showList(1);
+	})
 })

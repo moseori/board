@@ -30,8 +30,8 @@
 		<button class="btn btn-danger remove">삭제</button>
 		<button class="btn btn-primary list">목록</button>
 	</form>
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#replyForm">
+	<!-- 댓글 등록 -->
+	<button type="button" id="addReplyBtn" class="btn btn-primary" data-toggle="modal" data-target="#replyForm">
 	댓글등록
 	</button>
 
@@ -90,7 +90,7 @@
 				<button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
 				<button type="button" class="btn btn-danger" id="modalremoveBtn">삭제</button>
 				<button type="button" class="btn btn-primary" id="modalRegisterBtn">등록</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalCloseBtn">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -116,19 +116,6 @@
 			getForm.submit();
 		})
 		
-		//모달창
-		let modal=$('.modal');
-		let modalInputReply = modal.find('input[name="reply"]');
-		let modalInputReplyer = modal.find('input[name="replyer"]');
-		let modalInputReplydate = modal.find('input[name="regDate"]');
-		//모달이벤트 처리
-		$('#modalRegisterBtn').on('click',function(){
-			//let test=modalInputReply.val();
-			let test=modalInputReplyer.val();
-			alert(test);
-		})
-	})
-
 	$(function(){
 		let bnoValue=$('input[name="bno"]').val();
 		
@@ -162,6 +149,6 @@
 		}
 		//deleteTest();
 	})
-
+})
 </script>
 <%@ include file="../layout/footer.jsp"%>
