@@ -40,21 +40,10 @@
 		<div class="col-sm-12">
 			<div class="panel paner-default">
 				<div class="panel-heading">
-					<h4>댓글을 달아주세요</h4>
+					<h4 class="test">댓글을 달아주세요</h4>
 				</div>
 				<div class="panel-body">
-					<ul class="chat">
-						<li data-rno='1'>
-							<div>
-								<div class='header'>
-									<strong>홍길동</strong> 
-									<small class='pull-right text-muted'>2022-02-22</small>
-								</div>
-								<p>댓글내용.....</p>
-							</div>
-						</li>
-
-					</ul>
+					<ul class="chat"> </ul>
 				</div>
 			</div>
 		</div>

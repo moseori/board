@@ -6,7 +6,7 @@ let replyService = (function() {
 			url: contextPath + "/replies/new",
 			data: JSON.stringify(reply),
 			contentType: 'application/json;charset=utf-8',
-			sucess: function(result, status, xhr) {
+			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
 				}

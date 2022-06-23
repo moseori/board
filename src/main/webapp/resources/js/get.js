@@ -2,6 +2,18 @@ $(function() {
 	let bnoValue = $('input[name="bno"]').val();
 	let replyUL = $('.chat');
 
+	//모달창
+	let bno = $('input[name="bno"]').val();
+	let modal = $('.modal');
+	let modalInputReply = modal.find('input[name="reply"]');
+	let modalInputReplyer = modal.find('input[name="replyer"]');
+	let modalInputReplyDate = modal.find('input[name="regDate"]');
+
+	let modalModifyBtn = $('#modalModifyBtn')
+	let modalremoveBtn = $('#modalremoveBtn')
+	let modalRegisterBtn = $('#modalRegisterBtn')
+	let modalCloseBtn = $('#modalCloseBtn')
+	
 	function showList(page) {
 		replyService.getList({ bno: bnoValue, page: page }, function(list) {
 			let str = "";
@@ -29,23 +41,13 @@ $(function() {
 		return `${timeArr[0]}년 ${timeArr[1]}월 ${timeArr[2]}일`;
 	}
 	
-	//모달창
-	let bno = $('input[name="bno"]').val();
-	let modal = $('.modal');
-	let modalInputReply = modal.find('input[name="reply"]');
-	let modalInputReplyer = modal.find('input[name="replyer"]');
-	let modalInputReplyDate = modal.find('input[name="regDate"]');
-
-	let modalModifyBtn = $('#modalModifyBtn')
-	let modalremoveBtn = $('#modalremoveBtn')
-	let modalRegisterBtn = $('#modalRegisterBtn')
-	let modalCloseBtn = $('#modalCloseBtn')
+	
 
 	//댓글동록 모달창
 	$('#addReplyBtn').click(function() {
 		modalInputReplyDate.closest('div').hide()
-		$('#modalModifyBtn').hide()
-		$('#modalremoveBtn').hide()
+		modalModifyBtn.hide()
+		modalremoveBtn.hide()
 	})
 
 
@@ -58,8 +60,14 @@ $(function() {
 		}
 		replyService.add(reply, function(result) {
 			alert(result)
+			modal.modal('hide');
+			showList(1);
 		})
-		modal.modal('hide');
-		showList(1);
+	})
+	
+	$('.chat').on('click','li',function(){
+		//alert('클릭'+$(this).data('rno'));
+		let rno=$(this).data('rno');
+		alert(rno);
 	})
 })
