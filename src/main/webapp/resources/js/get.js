@@ -10,7 +10,7 @@ $(function() {
 	let modalInputReplyDate = modal.find('input[name="regDate"]');
 
 	let modalModifyBtn = $('#modalModifyBtn')
-	let modalremoveBtn = $('#modalremoveBtn')
+	let modalRemoveBtn = $('#modalRemoveBtn')
 	let modalRegisterBtn = $('#modalRegisterBtn')
 	let modalCloseBtn = $('#modalCloseBtn')
 	
@@ -67,6 +67,7 @@ $(function() {
 		})
 	})
 	
+	//수정,삭제 모달창
 	$('.chat').on('click','li',function(){
 		//alert('클릭'+$(this).data('rno'));
 		//alert(rno);
@@ -79,11 +80,34 @@ $(function() {
 			modalInputReplyDate.val(displayTime(reply.updateDate)).attr("readonly","readonly");
 			modal.data("rno",reply.rno);
 			
-			modal.find("button[id='modalCloseBtn']").hide();
+			modalInputReplyDate.closest('div').show();
 			modalModifyBtn.show();
-			modalremoveBtn.show();
+			modalRemoveBtn.show();
 			modalRegisterBtn.hide();
 			modal.modal("show");
+		})
+	})
+	
+	//댓글 수정 이벤트
+	modalModifyBtn.on("click", function() {
+		let reply = {
+			rno: modal.data('rno'),
+			reply: modalInputReply.val(),
+		};
+		replyService.update(reply, function(result) {
+			alert(result);
+			modal.modal('hide');
+			showList(1);
+		});
+	})
+	
+	//댓글 삭제 이벤트
+	modalRemoveBtn.on('click', function() {
+		let rno = modal.data('rno');
+		replyService.remove(rno, function(result) {
+			alert(result);
+			modal.modal('hide');
+			showList(1);
 		})
 	})
 })

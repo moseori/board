@@ -39,7 +39,7 @@ let replyService = (function() {
 		$.ajax({
 			type: "delete",
 			url: contextPath + "/replies/" + rno,
-			sucess: function(result, status, xhr) {
+			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
 				}
@@ -58,7 +58,7 @@ let replyService = (function() {
 			url: contextPath + "/replies/" + reply.rno,
 			data: JSON.stringify(reply),
 			contentType: 'application/json;charset=utf-8',
-			sucess: function(result, status, xhr) {
+			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
 				}

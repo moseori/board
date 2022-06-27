@@ -77,7 +77,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
-				<button type="button" class="btn btn-danger" id="modalremoveBtn">삭제</button>
+				<button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
 				<button type="button" class="btn btn-primary" id="modalRegisterBtn">등록</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalCloseBtn">닫기</button>
 			</div>
