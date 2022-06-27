@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -21,6 +23,7 @@ import me.light.service.ReplyServiceImpl;
 @Configuration
 @MapperScan("me.light.mapper")
 @EnableAspectJAutoProxy
+@EnableTransactionManagement
 @PropertySources({ @PropertySource("classpath:datasource/jdbc.properties") })
 public class RootConfig {
 
@@ -53,4 +56,8 @@ public class RootConfig {
 		return sessionFactoryBean.getObject();
 	}
 
+	@Bean
+	public DataSourceTransactionManager rxManager() {
+		return new DataSourceTransactionManager(dataSource());
+	}
 }
