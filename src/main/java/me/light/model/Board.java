@@ -19,6 +19,7 @@ public class Board {
 	private String title;
 	private String contents;
 	private String writer;
+	private int replyCnt;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
 }

@@ -31,10 +31,9 @@
 		<button class="btn btn-primary list">목록</button>
 	</form>
 	<!-- 댓글 등록 -->
-	<button type="button" id="addReplyBtn" class="btn btn-primary" data-toggle="modal" data-target="#replyForm">
-	댓글등록
-	</button>
-
+	<button type="button" id="addReplyBtn" class="btn btn-primary"
+		data-toggle="modal" data-target="#replyForm">댓글등록</button>
+	<div>댓글수 ${board.replyCnt}</div>
 
 	<div class="row">
 		<div class="col-sm-12">
@@ -43,7 +42,8 @@
 					<h4 class="test">댓글을 달아주세요</h4>
 				</div>
 				<div class="panel-body">
-					<ul class="chat"> </ul>
+					<ul class="chat">
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -63,23 +63,24 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="reply">내용입력</label> 
-					<input class="form-control" name="reply" id="reply">
+					<label for="reply">내용입력</label> <input class="form-control"
+						name="reply" id="reply">
 				</div>
 				<div class="form-group">
-					<label for="replyer">작성자</label> 
-					<input class="form-control" name="replyer" id="replyer">
+					<label for="replyer">작성자</label> <input class="form-control"
+						name="replyer" id="replyer">
 				</div>
 				<div class="form-group">
-					<label for="regDate">등록일</label> 
-					<input class="form-control" name="regDate" id="regDate">
+					<label for="regDate">등록일</label> <input class="form-control"
+						name="regDate" id="regDate">
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
 				<button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
 				<button type="button" class="btn btn-primary" id="modalRegisterBtn">등록</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalCloseBtn">닫기</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					id="modalCloseBtn">닫기</button>
 			</div>
 		</div>
 	</div>

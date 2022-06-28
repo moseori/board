@@ -48,7 +48,7 @@ $(function() {
 		modal.find('input').val('')
 		modalInputReplyDate.closest('div').hide()
 		modalModifyBtn.hide()
-		modalremoveBtn.hide()
+		modalRemoveBtn.hide()
 		modalRegisterBtn.show()
 	})
 

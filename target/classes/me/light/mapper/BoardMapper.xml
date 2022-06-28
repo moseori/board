@@ -27,18 +27,18 @@
 	</sql>
 	<select id="getList" resultType="me.light.model.Board">
 		select * from board_tbl
-		<include refid="search"/>
+		<include refid="search" />
 		order by bno desc
 		limit #{pageStart},#{perPageNum}
 	</select>
-	
+
 	<select id="totalCount" resultType="int">
-	select count(*) from board_tbl
-	<include refid="search"/>
+		select count(*) from board_tbl
+		<include refid="search" />
 	</select>
-	
+
 	<select id="get" resultType="me.light.model.Board">
-		select * from board_tbl 
+		select * from board_tbl
 		where bno=#{bno}
 	</select>
 
@@ -54,13 +54,17 @@
 	<update id="update">
 		update board_tbl set
 		title=#{title},
-		contents=#{contents}, 
+		contents=#{contents},
 		updateDate=now()
 		where bno=#{bno}
 	</update>
 
 	<delete id="delete">
-		delete from board_tbl 
-		where bno=#{bno}
+		delete from board_tbl where bno=#{bno}
 	</delete>
+
+	<update id="updateReplyCnt">
+		update board_tbl set replyCnt = replyCnt + #{amount}
+		where bno=#{bno}
+	</update>
 </mapper>

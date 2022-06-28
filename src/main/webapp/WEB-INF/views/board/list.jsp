@@ -40,7 +40,7 @@
 			<c:forEach items="${list}" var="b">
 				<tr>
 					<td>${b.bno}</td>
-					<td><a href="${b.bno}" class="get">${b.title}</a></td>
+					<td><a href="${b.bno}" class="get">${b.title}<b>[${b.replyCnt}]</b></a></td>
 					<td>${b.writer}</td>
 					<td>
 						<fmt:parseDate var="regDate" value="${b.regDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" /> 
