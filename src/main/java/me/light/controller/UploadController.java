@@ -2,6 +2,8 @@ package me.light.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +20,13 @@ public class UploadController {
 		
 	}
 	
-	@PostMapping("uploadFormAction")
+	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		for(MultipartFile file : uploadFile) {
 			System.out.println("========================");
 			System.out.println("파일 이름 : "+ file.getOriginalFilename());
 			System.out.println("파일 크기 : "+ file.getSize());
-			File saveFile=new File("C://storage", file.getOriginalFilename());
+			File saveFile=new File("C:/storage", file.getOriginalFilename());
 			try {
 				file.transferTo(saveFile);
 			} catch (IllegalStateException e) {
@@ -41,11 +43,18 @@ public class UploadController {
 	@PostMapping("/uploadAjaxAction")
 	@ResponseBody
 	public void uploadAjaxPost(MultipartFile[] uploadFile) {
+		File uploadPath=new File("C:/storage",getFolder());
+		
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		
 		for(MultipartFile file : uploadFile) {
 			System.out.println("========================");
 			System.out.println("파일 이름 : "+ file.getOriginalFilename());
 			System.out.println("파일 크기 : "+ file.getSize());
-			File saveFile=new File("C:\\storage", file.getOriginalFilename());
+			
+			File saveFile=new File("C:/storage", file.getOriginalFilename());
 			try {
 				file.transferTo(saveFile);
 			} catch (IllegalStateException e) {
@@ -54,6 +63,12 @@ public class UploadController {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private String getFolder() {
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
+		String str=sdf.format(new Date());
+		return str.replace("-", File.separator);
 	}
 
 	

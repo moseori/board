@@ -17,6 +17,21 @@
 <script>
 	$(function() {
 		let contextPath = '${pageContext.request.contextPath}';
+		let regex=new RegExp("(.*?)\.(exe|sh|js|alz|txt)$");
+		let maxSize=5242880;
+		
+		function checkExtension(fileName, fileSize){
+			if(fileSize >= maxSize){
+				alert("파일 사이즈 초과");
+				return false;
+			}
+			if (regex.test(fileName)){
+				alert("허용되지 않는 확장자");
+				return false;
+			}
+			return true;
+		}
+		
 		$('#uploadBtn').on('click', function() {
 			let formData = new FormData();
 
@@ -25,6 +40,9 @@
 			console.log(files);
 
 			for (let i = 0; i < files.length; i++) {
+				if(!checkExtension(files[i].name, files[i].size)){
+					return false;
+				}
 				formData.append("uploadFile", files[i])
 			}
 
