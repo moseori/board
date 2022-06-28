@@ -1,6 +1,10 @@
 package me.light.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.method.annotation.SessionStatusMethodArgumentResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -32,5 +36,10 @@ public class ServletConfig implements WebMvcConfigurer {
 		registry.addInterceptor(new MemberInterceptor()).addPathPatterns("/member/**").excludePathPatterns("member/register");
 	}
 	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		StandardServletMultipartResolver resolver =new StandardServletMultipartResolver();
+		return resolver;
+	}
 
 }
