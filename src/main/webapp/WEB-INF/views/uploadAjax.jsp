@@ -13,6 +13,9 @@
 		<input type="file" name="uploadFile" multiple="multiple">
 	</div>
 	<button id="uploadBtn">업로드</button>
+	<div class="uploadResult">
+	<ul></ul>
+	</div>
 </body>
 <script>
 	$(function() {
@@ -32,6 +35,7 @@
 			return true;
 		}
 		
+		let cloneObj=$('.uploadDiv').clone();
 		$('#uploadBtn').on('click', function() {
 			let formData = new FormData();
 
@@ -55,9 +59,20 @@
 				success : function(result) {
 					alert("Uploaded");
 					console.log(result)
+					$('.uploadDiv').html(cloneObj.html());
+					showUPloadFile(result);
 				}
 			});
 		})
+		
+		let uploadResult=$('.uploadResult ul')
+		function showUPloadFile(uploadResultArr){
+			let str="";
+			$(uploadResultArr).each(function(i,obj){
+				str+="<li>"+obj.fileName+"</li>"
+			})
+			uploadResult.append(str);
+		}
 	})
 </script>
 </html>
