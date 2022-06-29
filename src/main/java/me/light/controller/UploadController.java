@@ -2,8 +2,10 @@ package me.light.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,16 +52,16 @@ public class UploadController {
 		}
 		
 		for(MultipartFile file : uploadFile) {
-			System.out.println("========================");
-			System.out.println("파일 이름 : "+ file.getOriginalFilename());
-			System.out.println("파일 크기 : "+ file.getSize());
+			String uploadFileName=file.getOriginalFilename();
 			
-			File saveFile=new File("C:/storage", file.getOriginalFilename());
+			UUID uuid=UUID.randomUUID();
+			uploadFileName=uuid.toString()+"_"+uploadFileName;
+			
+			File saveFile=new File(uploadPath, uploadFileName);
 			try {
-				file.transferTo(saveFile);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
+//				file.transferTo(saveFile);
+				checkImageType(saveFile);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -69,6 +71,16 @@ public class UploadController {
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
 		String str=sdf.format(new Date());
 		return str.replace("-", File.separator);
+	}
+	
+	private boolean checkImageType(File file) {
+		try {
+			String contentType=Files.probeContentType(file.toPath());
+			System.out.println(contentType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	

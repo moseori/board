@@ -4,10 +4,14 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 public class Test11 {
 
 
-	@org.junit.Test
+	@Test
+	@Ignore
 	public void test00() {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();
@@ -17,4 +21,9 @@ public class Test11 {
 		System.out.println(test);
 	}
 
+	@Test
+	public void test01() {
+		String contentType="image...";
+		System.out.println(contentType.startsWith("image"));
+	}
 }
