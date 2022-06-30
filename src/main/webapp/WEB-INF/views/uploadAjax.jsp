@@ -76,11 +76,10 @@
 				
 				if(!obj.image){//이미지 아닌경우
 					let fileCellPath = encodeURIComponent(obj.uploadPath + "/"+obj.uuid+"_"+obj.fileName);
-					let fileLink=fileCellPath.replace(new RegExp(/\\/g),"/");
 				
 					str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>";
-					str+="<a href='${pageContext.request.contextPath}/download?fileName="+fileCellPath+"'>"+obj.fileName+"</a>";
-					str+="<span data-file='"+fileLink+"' data-type='file'>삭제</span>"
+					str+="<a href='${pageContext.request.contextPath}/download?fileName="+ fileCellPath +"'>"+obj.fileName+"</a>";
+					str+="<span data-file='"+fileCellPath+"' data-type='file'>삭제</span>"
 					str+="</li>";
 				}else{
 					let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
@@ -89,6 +88,7 @@
 					
 					str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
 					str+="<a href='javascript:showImage(\""+originPath+"\")'>이미지원본보기</a>"
+					str+="<span data-file='"+fileCellPath+"' data-type='file'>삭제</span>"
 					str+="</li>"
 				}
 			})
@@ -96,8 +96,21 @@
 		}
 		
 		uploadResult.on('click','span',function(){
-			console.log($(this).data('file'));
-		})
+			//console.log($(this).data('file'));
+			let targetFile=$(this).data('file');
+			let type=$(this).data('type');
+			
+			$.ajax({
+				url : contextPath + '/deleteFile',
+				data : {fileName : targetFile, type : type},
+				dataType : 'text',
+				type : 'post',
+				success : function(result){
+					alert(result);
+				}
+			});//ajax end
+		});
+		
 	})//document.ready end;
 	
 	function showImage(path) {
