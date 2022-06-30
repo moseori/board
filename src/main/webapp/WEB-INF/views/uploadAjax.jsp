@@ -16,10 +16,13 @@
 	<div class="uploadResult">
 	<ul></ul>
 	</div>
+	
+	<div class="oImg">
+	</div>
 </body>
 <script>
 	$(function() {
-		let contextPath = '${pageContext.request.contextPath}';
+		let contextPath ='${pageContext.request.contextPath}';
 		let regex=new RegExp("(.*?)\.(exe|sh|js|alz)$");
 		let maxSize=5242880;
 		
@@ -73,25 +76,33 @@
 				
 				if(!obj.image){//이미지 아닌경우
 					let fileCellPath = encodeURIComponent(obj.uploadPath + "/"+obj.uuid+"_"+obj.fileName);
+					let fileLink=fileCellPath.replace(new RegExp(/\\/g),"/");
+				
 					str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>";
 					str+="<a href='${pageContext.request.contextPath}/download?fileName="+fileCellPath+"'>"+obj.fileName+"</a>";
+					str+="<span data-file='"+fileLink+"' data-type='file'>삭제</span>"
 					str+="</li>";
 				}else{
 					let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
 					let originPath=obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
 					originPath=originPath.replace(new RegExp(/\\/g),"/");
-					console.log(originPath);
+					
 					str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
-					str+="<a href='javascript:showImage()'>이미지원본보기</a>"
+					str+="<a href='javascript:showImage(\""+originPath+"\")'>이미지원본보기</a>"
 					str+="</li>"
 				}
 			})
 			uploadResult.append(str);
 		}
+		
+		uploadResult.on('click','span',function(){
+			console.log($(this).data('file'));
+		})
 	})//document.ready end;
-
-	function showImage() {
-		alert('이미지 원본 보기')
+	
+	function showImage(path) {
+	let imgTag="<img src='${pageContext.request.contextPath}/display?fileName="+encodeURI(path)+"' width=300px>"
+		$('.oImg').html(imgTag);
 	}
 </script>
 </html>
