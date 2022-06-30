@@ -20,7 +20,7 @@
 <script>
 	$(function() {
 		let contextPath = '${pageContext.request.contextPath}';
-		let regex=new RegExp("(.*?)\.(exe|sh|js|alz|txt)$");
+		let regex=new RegExp("(.*?)\.(exe|sh|js|alz)$");
 		let maxSize=5242880;
 		
 		function checkExtension(fileName, fileSize){
@@ -67,17 +67,31 @@
 		
 		let uploadResult=$('.uploadResult ul')
 		function showUPloadFile(uploadResultArr){
+			
 			let str="";
 			$(uploadResultArr).each(function(i,obj){
+				
 				if(!obj.image){//이미지 아닌경우
-					str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>"+obj.fileName +"</li>";
+					let fileCellPath = encodeURIComponent(obj.uploadPath + "/"+obj.uuid+"_"+obj.fileName);
+					str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>";
+					str+="<a href='${pageContext.request.contextPath}/download?fileName="+fileCellPath+"'>"+obj.fileName+"</a>";
+					str+="</li>";
 				}else{
 					let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
-					str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'></li>";
+					let originPath=obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
+					originPath=originPath.replace(new RegExp(/\\/g),"/");
+					console.log(originPath);
+					str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
+					str+="<a href='javascript:showImage()'>이미지원본보기</a>"
+					str+="</li>"
 				}
 			})
 			uploadResult.append(str);
 		}
-	})
+	})//document.ready end;
+
+	function showImage() {
+		alert('이미지 원본 보기')
+	}
 </script>
 </html>

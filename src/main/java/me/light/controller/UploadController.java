@@ -126,15 +126,16 @@ public class UploadController {
 		System.out.println(userAgent);
 		try {
 			downloadName=URLEncoder.encode(resourceOriginalName,"UTF-8");
-			headers.add("Context-Disposition","attachment;fileName="+ downloadName);
+			headers.add("Content-Disposition","attachment;fileName="+ downloadName);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		
 		System.out.println(resource.exists());
 		System.out.println(resourceOriginalName);
+		System.out.println(resourceName);
 		
-		return new ResponseEntity<Resource>(HttpStatus.OK);
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
 	private String getFolder() {
