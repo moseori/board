@@ -69,12 +69,11 @@
 		function showUPloadFile(uploadResultArr){
 			let str="";
 			$(uploadResultArr).each(function(i,obj){
-				str+="<li>"+obj.fileName+"</li>"
-				
 				if(!obj.image){//이미지 아닌경우
 					str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>"+obj.fileName +"</li>";
 				}else{
-					str+="<li>"+obj.fileName+"</li>";
+					let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
+					str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'></li>";
 				}
 			})
 			uploadResult.append(str);
