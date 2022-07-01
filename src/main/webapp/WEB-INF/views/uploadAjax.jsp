@@ -81,14 +81,14 @@
 					str+="<a href='${pageContext.request.contextPath}/download?fileName="+ fileCellPath +"'>"+obj.fileName+"</a>";
 					str+="<span data-file='"+fileCellPath+"' data-type='file'>삭제</span>"
 					str+="</li>";
-				}else{
+				} else{
 					let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
 					let originPath=obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
 					originPath=originPath.replace(new RegExp(/\\/g),"/");
 					
 					str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
 					str+="<a href='javascript:showImage(\""+originPath+"\")'>이미지원본보기</a>"
-					str+="<span data-file='"+fileCellPath+"' data-type='file'>삭제</span>"
+					str+="<span data-file='"+fileCellPath+"' data-type='image'>삭제</span>"
 					str+="</li>"
 				}
 			})
