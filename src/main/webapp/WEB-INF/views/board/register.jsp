@@ -44,6 +44,33 @@ function checkExtension(fileName, fileSize){
 	return true;
 }
 
+let uploadResult=$('.uploadResult ul')
+function showUploadResult(uploadResultArr){
+	if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+	let str="";
+	$(uploadResultArr).each(function(i,obj){
+		
+		if(!obj.image){//이미지 아닌경우
+			let fileCellPath = encodeURIComponent(obj.uploadPath + "/"+obj.uuid+"_"+obj.fileName);
+		
+			str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>";
+			str+="<a href='${pageContext.request.contextPath}/download?fileName="+ fileCellPath +"'>"+obj.fileName+"</a>";
+			str+="<span data-file='"+fileCellPath+"' data-type='file'>삭제</span>"
+			str+="</li>";
+		} else{
+			let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
+			let originPath=obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
+			originPath=originPath.replace(new RegExp(/\\/g),"/");
+			
+			str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
+			str+="<a href='javascript:showImage(\""+originPath+"\")'>이미지원본보기</a>"
+			str+="<span data-file='"+fileCellPath+"' data-type='image'>삭제</span>"
+			str+="</li>"
+		}
+	})
+	uploadResult.append(str);
+}
+
 $(function(){
 	let form = $('#registerForm');
 		let submitBn = $('#registerForm button');
@@ -70,13 +97,26 @@ $(function(){
 				data : formData,
 				dataType:'json',
 				success : function(result){
-					$(result).each(function(i,obj){
-						console.log(obj.fileName);
-						console.log(obj.uuid);
-						console.log(obj.uploadPath);
-					})
+					showUploadResult(result)
 				}
 			});
+		})
+		
+		$('.uploadResult ul').on('click', 'span', function(){
+			let targetFile=$(this).data('file');
+			let type=$(this).data('type');
+			let targetLi=$(this).closest('li');
+			
+			$.ajax({
+				url : contextPath + '/deleteFile',
+				type : 'post',
+				data : {fileName : targetFile, type : type},
+				dataType : 'text',
+				success : function(result){
+					alert(result);
+					targetLi.remove();
+				}
+			})
 		})
 
 	})//Document ready end
