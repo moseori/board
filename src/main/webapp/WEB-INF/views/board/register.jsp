@@ -78,7 +78,18 @@ $(function(){
 		let submitBtn = $('#registerForm button');
 		form.on('click', function(e) {
 			e.preventDefault();
-			console.log("폼 기본동작금지");
+			//console.log("폼 기본동작금지");
+			
+			let str="";
+			$('.uploadResult ul li').each(function(i, obj){
+				let jobj=$(obj);
+				//console.log(jobj);
+				str+="<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>"
+				str+="<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>"
+				str+="<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>"
+				str+="<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>"
+			});
+			form.append(str);
 		})
 
 		//파일 업로드
