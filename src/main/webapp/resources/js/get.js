@@ -110,4 +110,31 @@ $(function() {
 			showList(1);
 		})
 	})
+	
+	//첨부파일 리스트 불러오기
+	$.getJSON(contextPath + "/board/getAttachList", { bno: bnoValue }, function(attachList) {
+		//console.log(attachList);
+		let str = "";
+		$(attachList).each(function(i, obj) {
+			if (!obj.fileType) {//이미지 아닌경우
+				let fileCellPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+
+				str += "<li class='list-group-item' data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType + "'>"
+				str += "<img src='"+contextPath+"/resources/img/attach.png' width=25px>";
+				str += "<a href='"+contextPath+"/download?fileName=" + fileCellPath + "'>" + obj.fileName + "</a>";
+				str += "</li>";
+			} else {
+				let fileCellPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+				let originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName;
+				originPath = originPath.replace(new RegExp(/\\/g), "/");
+
+				str += "<li class='list-group-item' data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType + "'>"
+				str += "<img src='"+contextPath+"/display?fileName=" + fileCellPath + "'>";
+				str += "<a href='"+contextPath+"/download?fileName=" + fileCellPath + "'>" + obj.fileName + "</a>";
+				str += "</li>"
+			}
+		}) //each end
+		$('.uploadResult ul').append(str);
+	})
+	
 })
