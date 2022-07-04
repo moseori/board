@@ -14,6 +14,6 @@
 	</delete>
 	
 	<select id="findByBno" resultType="me.light.model.BoardAttachVO">
-	select * from attch_tbl where bno=#{bno}
+	select * from attach_tbl where bno=#{bno}
 	</select>
 </mapper>

@@ -3,6 +3,7 @@ package me.light.service;
 import java.util.List;
 
 import me.light.model.Board;
+import me.light.model.BoardAttachVO;
 import me.light.model.Criteria;
 
 public interface BoardService {
@@ -23,4 +24,6 @@ public interface BoardService {
 	void register(Board board);
 
 	int totalCount(Criteria criteria);
+
+	List<BoardAttachVO> getAttachList(Long bno);
 }

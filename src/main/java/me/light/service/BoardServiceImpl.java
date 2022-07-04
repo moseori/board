@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import me.light.mapper.BoardAttachMapper;
 import me.light.mapper.BoardMapper;
 import me.light.model.Board;
+import me.light.model.BoardAttachVO;
 import me.light.model.Criteria;
 
 @Service
@@ -75,5 +76,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int totalCount(Criteria criteria) {
 		return boardMapper.totalCount(criteria);
+	}
+
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		return attachMapper.findByBno(bno);
 	}
 }

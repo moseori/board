@@ -1,14 +1,21 @@
 package me.light.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import me.light.model.Board;
+import me.light.model.BoardAttachVO;
 import me.light.model.Criteria;
 import me.light.model.PageMaker;
 import me.light.service.BoardService;
@@ -72,5 +79,12 @@ public class BoardController {
 //		System.out.println(board.getBno());
 //		rttr.addFlashAttribute("message",board.getBno());
 		return "redirect:list";
+	}
+	
+	@GetMapping(value ="/getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public  ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
+		List<BoardAttachVO> attcahList=service.getAttachList(bno);
+		return new ResponseEntity<>(attcahList, HttpStatus.OK);
 	}
 }
