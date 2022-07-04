@@ -43,11 +43,10 @@
 	</select>
 
 	<insert id="insert">
-		insert into
-		board_tbl(title,contents,writer)
-		values(#{title},#{contents},#{writer});
-		<selectKey keyProperty="bno" order="AFTER" resultType="Long">
-			select last_insert_id()
+		insert into board_tbl(bno,title,contents,writer)
+		values(#{bno},#{title},#{contents},#{writer});
+		<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
+			select max(bno)+1 from board_tbl
 		</selectKey>
 	</insert>
 

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import me.light.mapper.BoardAttachMapper;
 import me.light.mapper.BoardMapper;
 import me.light.model.Board;
 import me.light.model.Criteria;
@@ -15,6 +17,9 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 
+	@Autowired
+	private BoardAttachMapper attachMapper;
+	
 	@Override
 	public List<Board> getList(Criteria criteria) {
 		return boardMapper.getList(criteria);
@@ -55,9 +60,15 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Transactional
 	@Override
 	public void register(Board board) {
 		boardMapper.insert(board);
+		if(board.getAttachList()==null|| board.getAttachList().size()==0) return;
+		board.getAttachList().forEach(attach ->{
+			attach.setBno(board.getBno());
+			attachMapper.insert(attach);
+		});
 		
 	}
 
