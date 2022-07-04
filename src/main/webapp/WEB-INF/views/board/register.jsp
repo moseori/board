@@ -50,10 +50,11 @@ function showUploadResult(uploadResultArr){
 	let str="";
 	$(uploadResultArr).each(function(i,obj){
 		
-		if(!obj.image){//이미지 아닌경우
+		if(!obj.fileType){//이미지 아닌경우
 			let fileCellPath = encodeURIComponent(obj.uploadPath + "/"+obj.uuid+"_"+obj.fileName);
 		
-			str+="<li><img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>";
+		str+="<li class='list-group-item' data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>"
+			str+="<img src='${pageContext.request.contextPath}/resources/img/attach.png' width=25px>";
 			str+="<a href='${pageContext.request.contextPath}/download?fileName="+ fileCellPath +"'>"+obj.fileName+"</a>";
 			str+="<span data-file='"+fileCellPath+"' data-type='file'>삭제</span>"
 			str+="</li>";
@@ -62,7 +63,8 @@ function showUploadResult(uploadResultArr){
 			let originPath=obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
 			originPath=originPath.replace(new RegExp(/\\/g),"/");
 			
-			str+="<li><img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
+			str+="<li class='list-group-item' data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>"
+			str+="<img src='${pageContext.request.contextPath}/display?fileName="+fileCellPath+"'>";
 			str+="<a href='javascript:showImage(\""+originPath+"\")'>이미지원본보기</a>"
 			str+="<span data-file='"+fileCellPath+"' data-type='image'>삭제</span>"
 			str+="</li>"
@@ -73,7 +75,7 @@ function showUploadResult(uploadResultArr){
 
 $(function(){
 	let form = $('#registerForm');
-		let submitBn = $('#registerForm button');
+		let submitBtn = $('#registerForm button');
 		form.on('click', function(e) {
 			e.preventDefault();
 			console.log("폼 기본동작금지");
