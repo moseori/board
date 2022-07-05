@@ -12,6 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -25,6 +26,7 @@ import me.light.service.ReplyServiceImpl;
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @PropertySources({ @PropertySource("classpath:datasource/jdbc.properties") })
+@EnableScheduling
 public class RootConfig {
 
 	@Value("${jdbc.driverClassName}")
