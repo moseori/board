@@ -16,4 +16,8 @@
 	<select id="findByBno" resultType="me.light.model.BoardAttachVO">
 	select * from attach_tbl where bno=#{bno}
 	</select>
+
+	<delete id="deleteAll">
+		delete from attach_tbl where bno=#{bno}
+	</delete>
 </mapper>

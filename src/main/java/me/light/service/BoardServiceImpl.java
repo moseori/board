@@ -55,10 +55,11 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Transactional
 	@Override
 	public void remove(Long bno) {
+		attachMapper.deleteAll(bno);
 		boardMapper.delete(bno);
-		
 	}
 
 	@Transactional

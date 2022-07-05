@@ -131,6 +131,7 @@ $(function() {
 				str += "<li class='list-group-item' data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType + "'>"
 				str += "<img src='"+contextPath+"/display?fileName=" + fileCellPath + "'>";
 				str += "<a href='"+contextPath+"/download?fileName=" + fileCellPath + "'>" + obj.fileName + "</a>";
+				str+="<a href='javascript:showImage(\""+originPath+"\")'>이미지원본보기</a>"
 				str += "</li>"
 			}
 		}) //each end
@@ -138,3 +139,7 @@ $(function() {
 	})
 	
 })
+function showImage(path) {
+	let imgTag = "<img src='" + contextPath + "/display?fileName=" + encodeURI(path) + "' width=300px>"
+	$('.oImg').html(imgTag);
+}
