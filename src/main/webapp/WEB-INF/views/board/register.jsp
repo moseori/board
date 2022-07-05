@@ -115,6 +115,7 @@ $(function(){
 			});
 		})
 		
+		//삭제 처리
 		$('.uploadResult ul').on('click', 'span', function(){
 			let targetFile=$(this).data('file');
 			let type=$(this).data('type');
