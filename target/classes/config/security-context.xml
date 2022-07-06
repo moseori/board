@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<bean class="me.light.model.Board" id="testBean">
+		<property value="ImportResource 테스트" name="contents" />
+	</bean>
+
+	<sec:http>
+		<sec:intercept-url access="permitAll" pattern="/security/all" />
+		<sec:intercept-url access="hasRole('ROLE_MEMBER')" pattern="/security/member" />
+		<sec:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/security/admin" />
+		<sec:form-login />
+	</sec:http>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="leekwanghyup" authorities="ROLE_MEMBER" password="{noop}1234" />
+				<sec:user name="superkwanghyup" authorities="ROLE_MEMBER, ROLE_ADMIN" password="{noop}1234" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+</beans>

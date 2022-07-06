@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -27,6 +28,7 @@ import me.light.service.ReplyServiceImpl;
 @EnableTransactionManagement
 @PropertySources({ @PropertySource("classpath:datasource/jdbc.properties") })
 @EnableScheduling
+@ImportResource(value = { "classpath:config/security-context.xml"})
 public class RootConfig {
 
 	@Value("${jdbc.driverClassName}")
