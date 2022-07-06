@@ -1,15 +1,12 @@
 package me.light.task;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +22,7 @@ public class FileCheckTask {
 	@Autowired
 	private BoardAttachMapper attachMapper;
 
-	@Scheduled(cron = "0/10 * * * * *")
+	@Scheduled(cron = "0 0 10 * * *")
 	public void checkFile() {
 		System.out.println("Check files ....");
 
