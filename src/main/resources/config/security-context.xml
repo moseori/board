@@ -8,19 +8,23 @@
 	<bean class="me.light.model.Board" id="testBean">
 		<property value="ImportResource 테스트" name="contents" />
 	</bean>
+	
+	<bean id="customAccessDeniedHandler" class="me.light.security.CustomAccessDeniedHandler"/>
 
 	<sec:http>
 		<sec:intercept-url access="permitAll" pattern="/security/all" />
 		<sec:intercept-url access="hasRole('ROLE_MEMBER')" pattern="/security/member" />
 		<sec:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/security/admin" />
-		<sec:form-login />
+		<sec:form-login login-page="/customLogin"/>
+		<!--<sec:access-denied-handler error-page="/accessError"/>  -->
+		<sec:access-denied-handler ref="customAccessDeniedHandler"/>
 	</sec:http>
 
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 			<sec:user-service>
-				<sec:user name="leekwanghyup" authorities="ROLE_MEMBER" password="{noop}1234" />
-				<sec:user name="superkwanghyup" authorities="ROLE_MEMBER, ROLE_ADMIN" password="{noop}1234" />
+				<sec:user name="member" authorities="ROLE_MEMBER" password="{noop}1234" />
+				<sec:user name="admin" authorities="ROLE_MEMBER, ROLE_ADMIN" password="{noop}1234" />
 			</sec:user-service>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
