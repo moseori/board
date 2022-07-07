@@ -10,12 +10,14 @@
 	</bean>
 	
 	<bean id="customAccessDeniedHandler" class="me.light.security.CustomAccessDeniedHandler"/>
+	<bean id="customLoginSuccessHandler" class="me.light.security.CustomLoginSuccessHandler"></bean>
 
 	<sec:http>
 		<sec:intercept-url access="permitAll" pattern="/security/all" />
 		<sec:intercept-url access="hasRole('ROLE_MEMBER')" pattern="/security/member" />
 		<sec:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/security/admin" />
-		<sec:form-login login-page="/customLogin"/>
+		<sec:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccessHandler"/>
+		<sec:logout logout-url="/customLogout" invalidate-session="true"/>
 		<!--<sec:access-denied-handler error-page="/accessError"/>  -->
 		<sec:access-denied-handler ref="customAccessDeniedHandler"/>
 	</sec:http>
