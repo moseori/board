@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -29,6 +30,7 @@ import me.light.service.ReplyServiceImpl;
 @PropertySources({ @PropertySource("classpath:datasource/jdbc.properties") })
 @EnableScheduling
 @ImportResource(value = { "classpath:config/security-context.xml"})
+//@Import(value = {ServletConfig.class})
 public class RootConfig {
 
 	@Value("${jdbc.driverClassName}")

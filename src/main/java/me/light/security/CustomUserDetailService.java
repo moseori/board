@@ -11,7 +11,7 @@ import me.light.model.MemberVO;
 public class CustomUserDetailService implements UserDetailsService{
 	
 	@Autowired
-	MemberMapper mapper;
+	private MemberMapper mapper;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -40,6 +40,7 @@ public class MemberTest extends AppTest{
 	}
 	
 	@Test
+	@Ignore
 	public void adminInsertTest() {
 		String sql="insert into member_tbl(userId, userPw, userName) values(?,?,?)";
 		Connection conn=null;
