@@ -13,10 +13,11 @@
 	<bean id="customLoginSuccessHandler" class="me.light.security.CustomLoginSuccessHandler"></bean>
 	<!-- <bean id="customNoopPasswordEncoder" class="me.light.security.CustomNoopPasswordEncoder"></bean> -->
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	<bean id="cutomUserDetailService" class="me.light.security.CustomUserDetailService"></bean>
 
 	<sec:http>
 		<sec:intercept-url access="permitAll" pattern="/security/all" />
-		<sec:intercept-url access="hasRole('ROLE_USER')" pattern="/security/member" />
+		<sec:intercept-url access="hasRole('ROLE_MEMBER')" pattern="/security/member" />
 		<sec:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/security/admin" />
 		<sec:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccessHandler"/>
 		<sec:logout logout-url="/customLogout" invalidate-session="true"/>
@@ -25,14 +26,13 @@
 	</sec:http>
 
 	<sec:authentication-manager>
-		<sec:authentication-provider>
+		<sec:authentication-provider user-service-ref="cutomUserDetailService">
 			<!-- 
 			<sec:user-service>
 				<sec:user name="member" authorities="ROLE_MEMBER" password="{noop}1234" />
 				<sec:user name="admin" authorities="ROLE_MEMBER, ROLE_ADMIN" password="{noop}1234" />
 			</sec:user-service> 
 			-->
-			<sec:jdbc-user-service data-source-ref="dataSource"/>
 			<sec:password-encoder ref="bCryptPasswordEncoder"/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
