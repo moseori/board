@@ -11,7 +11,8 @@
 	
 	<bean id="customAccessDeniedHandler" class="me.light.security.CustomAccessDeniedHandler"/>
 	<bean id="customLoginSuccessHandler" class="me.light.security.CustomLoginSuccessHandler"></bean>
-	<bean id="customNoopPasswordEncoder" class="me.light.security.CustomNoopPasswordEncoder"></bean>
+	<!-- <bean id="customNoopPasswordEncoder" class="me.light.security.CustomNoopPasswordEncoder"></bean> -->
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 
 	<sec:http>
 		<sec:intercept-url access="permitAll" pattern="/security/all" />
@@ -32,7 +33,7 @@
 			</sec:user-service> 
 			-->
 			<sec:jdbc-user-service data-source-ref="dataSource"/>
-			<sec:password-encoder ref="customNoopPasswordEncoder"/>
+			<sec:password-encoder ref="bCryptPasswordEncoder"/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
