@@ -28,7 +28,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 	private String errorMessage;
 	@Value("/customLogin")
 	private String defaultFailureUrl;
-
+	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
@@ -36,21 +36,22 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 		String username = request.getParameter(loginId);
 		String password = request.getParameter(loginPw);
 		String errorMsg = request.getParameter(errorMessage);
-
-		System.out.println(username);
-		System.out.println(password);
-		System.out.println(errorMsg);
 		
 		if (exception instanceof BadCredentialsException) {
 			errorMsg="비밀번호 일치하지 않습니다.";
 		} 
 		
+		System.out.println(username);
+		System.out.println(password);
+		System.out.println(errorMsg);
+		
 		request.setAttribute(loginId, username);
 		request.setAttribute(loginPw, password);
 		request.setAttribute(errorMessage, errorMsg);
-
+		
 		request.getRequestDispatcher(defaultFailureUrl)
 				.forward(request, response);
 	}
 
 }
+

@@ -3,6 +3,7 @@
 <mapper namespace="me.light.mapper.MemberMapper">
 
 	<resultMap type="me.light.model.MemberVO" id="memberMap">
+		<id property="userId" column="userId" />	
 		<result property="userId" column="userId" />
 		<result property="userPw" column="userPw" />
 		<result property="userName" column="userName" />
@@ -17,7 +18,7 @@
 
 
 	<select id="read" resultMap="memberMap">
-		select M.userId, A.auth from member_tbl as M inner join member_auth as A on
+		select * from member_tbl as M inner join member_auth as A on
 		M.userId = #{userId}
 	</select>
 </mapper>

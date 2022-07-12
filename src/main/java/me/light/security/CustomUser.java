@@ -16,9 +16,9 @@ import me.light.model.MemberVO;
 public class CustomUser extends User{
 
 	private MemberVO memberVO; 
-
+	
 	private static final long serialVersionUID = -6023472045848484765L;
-
+	
 	public CustomUser(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
 			Collection<? extends GrantedAuthority> authorities) {
