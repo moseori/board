@@ -20,6 +20,9 @@
 				<input type="checkbox" name="remember-me" id="remember-me">
 				<label for="remember-me">Remember Me</label>
 			</div>		
+			<div class="error_area">
+			${errorMessage}
+			</div>
 			<div class="form-group">
 				<button class="btn btn-primary form-control">로그인</button>
 			</div>
