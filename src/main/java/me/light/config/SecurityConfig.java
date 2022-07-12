@@ -2,7 +2,6 @@ package me.light.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Qualifier(value="bcryptPwEncoder")
 	PasswordEncoder passwordEncoder;
 	
+	
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//auth.inMemoryAuthentication().withUser("leekwanghyup").password("{noop}1234").roles("ROLE_MEMBER");
@@ -40,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/security/all").permitAll()
 		.antMatchers("/security/admin").access("hasRole('ROLE_ADMIN')")
 		.antMatchers("/security/member").access("hasRole('ROLE_MEMBER')");
-		http.formLogin().usernameParameter("loginId").passwordParameter("loginPw").loginPage("/customLogin").loginProcessingUrl("/member/login").successHandler(loginSuccessHandler);
+		http.formLogin().usernameParameter("loginId").passwordParameter("loginPw").loginPage("/customLogin").loginProcessingUrl("/member/login").successHandler(loginSuccessHandler).failureHandler(null);
 		
 		http.logout().logoutUrl("/customLogout").invalidateHttpSession(true).deleteCookies("remember-me", "JSESSION_ID");
 	

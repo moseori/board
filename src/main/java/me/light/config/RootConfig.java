@@ -29,8 +29,8 @@ import me.light.service.ReplyServiceImpl;
 @EnableTransactionManagement
 @PropertySources({ @PropertySource("classpath:datasource/jdbc.properties") })
 @EnableScheduling
-@ImportResource(value = { "classpath:config/security-context.xml"})
-//@Import(value = {ServletConfig.class})
+//@ImportResource(value = { "classpath:config/security-context.xml"})
+@Import(value = {ServletConfig.class})
 public class RootConfig {
 
 	@Value("${jdbc.driverClassName}")
