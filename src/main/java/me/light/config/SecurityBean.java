@@ -1,9 +1,14 @@
 package me.light.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import me.light.security.CustomNoopPasswordEncoder;
 
@@ -23,6 +28,8 @@ public class SecurityBean {
 		return new CustomUserDetailService(); 
 	}
 	*/
+	@Autowired
+	DataSource dataSource;
 
 	@Bean(name = "뽈롱")
 	public PasswordEncoder bcryptPwEncoder() {
@@ -32,6 +39,13 @@ public class SecurityBean {
 	@Bean
 	public PasswordEncoder nooPencoder() {
 		return new CustomNoopPasswordEncoder();
+	}
+	
+	@Bean
+	public PersistentTokenRepository persistentTokenRepository() {
+		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+		repo.setDataSource(dataSource);
+		return repo;
 	}
 
 	/*

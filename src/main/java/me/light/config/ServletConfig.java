@@ -2,6 +2,7 @@ package me.light.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.method.annotation.SessionStatusMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -16,6 +17,7 @@ import me.light.common.MemberInterceptor;
 
 @EnableWebMvc
 @ComponentScan("me.light")
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class ServletConfig implements WebMvcConfigurer {
 
 	@Override

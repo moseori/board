@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -32,6 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	AuthenticationFailureHandler failureHandler; 
+	
+	@Autowired
+	PersistentTokenRepository persistentTokenRepository;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.successHandler(loginSuccessHandler)
 			.failureHandler(failureHandler);
 
+		http.rememberMe().key("project").tokenRepository(persistentTokenRepository).tokenValiditySeconds(64800);
+		
 		http.logout()
 			.logoutUrl("/customLogout")
 			.invalidateHttpSession(true)
