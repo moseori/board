@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -45,6 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("utf-8");
+		filter.setForceEncoding(true);
+		
+		http.csrf().ignoringAntMatchers("/uploadAjaxAction","/deleteFile", "/replies/**");
+		
 		http.authorizeRequests()
 			.antMatchers("/security/all").permitAll()
 			.antMatchers("/security/admin").access("hasRole('ROLE_ADMIN')")
@@ -58,14 +65,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.successHandler(loginSuccessHandler)
 			.failureHandler(failureHandler);
 
-		http.rememberMe().key("project").tokenRepository(persistentTokenRepository).tokenValiditySeconds(64800);
+		http.rememberMe().key("project")
+			.tokenRepository(persistentTokenRepository)
+			.tokenValiditySeconds(64800);
 		
 		http.logout()
 			.logoutUrl("/customLogout")
 			.invalidateHttpSession(true)
 			.deleteCookies("remember-me","JSESSION_ID");
 	}
-
-
 
 }
