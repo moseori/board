@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
+<%@ include file="../layout/header.jsp"%>
+
+<div class="container">
 	<sec:authorize access="isAnonymous()">
 		<a href="/customLogin">로그인</a>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-		<a href="/customLogout">로그아웃</a>
+		<sec:authentication property="principal.memberVO" var="member" />
+	${member.userName}님 로그인 중.. <br>
+		<form action="${contextPath}/customLogout" method="post">
+			<button class="btn btn-primary">로그아웃</button>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		</form>
 	</sec:authorize>
-</body>
-</html>
+
+</div>
+<%@ include file="../layout/footer.jsp"%>

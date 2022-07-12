@@ -9,14 +9,14 @@ import me.light.mapper.MemberMapper;
 import me.light.model.MemberVO;
 
 public class CustomUserDetailService implements UserDetailsService{
-	
+
 	@Autowired
-	private MemberMapper mapper;
+	MemberMapper mapper; 
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MemberVO memberVO=mapper.read(username);
-		return memberVO != null? new CustomUser(memberVO): null;
+		MemberVO memberVO = mapper.read(username);
+		return memberVO != null ? new CustomUser(memberVO) : null;
 	}
 
 }

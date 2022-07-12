@@ -20,30 +20,31 @@ public class SecurityBean {
 	//<bean id="cutomUserDetailService" class="me.light.security.CustomUserDetailService"></bean>
 	@Bean
 	public AuthenticationSuccessHandler loginSuccessHandler() {
-		return new CustomLoginSuccessHandler();
+		return new CustomLoginSuccessHandler(); 
 	}
-	
+
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new CustomUserDetailService();
+		return new CustomUserDetailService(); 
 	}
-	
-	@Bean
+
+	@Bean(name = "뽈롱")
 	public PasswordEncoder bcryptPwEncoder() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(); 
 	}
-	
+
 	@Bean
-	public PasswordEncoder noopEncoder() {
+	public PasswordEncoder nooPencoder() {
 		return new CustomNoopPasswordEncoder();
 	}
-	
+
+	@Bean
 	public AuthenticationFailureHandler failureHandler() {
-		LoginFailureHandler lf=new LoginFailureHandler();
+		LoginFailureHandler lf = new LoginFailureHandler();
 		lf.setLoginId("loginId");
 		lf.setLoginPw("loginPw");
 		lf.setErrorMessage("errorMessage");
-		lf.setDefaultFailuruUrl("defaultFailuruUrl");
+		lf.setDefaultFailureUrl("/customLogin");
 		return lf;
 	}
 }
