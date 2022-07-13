@@ -4,7 +4,9 @@
 <div class="container">
 <h2>수정페이지</h2> <br>
 <form action="modify" method="post" id="modifyForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<input type="hidden" name="bno" value="${board.bno}"> 
+	<input type="hidden" name="writer" value="${board.writer}">
 	게시물 번호 :${board.bno} <br> 
 	제목 : <input type="text" name="title" value="${board.title}"><br> 
 	내용 : <textarea rows="" cols="" name="contents">${board.contents}</textarea> <br> 

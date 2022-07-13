@@ -7,9 +7,11 @@
 </sec:authorize>
 <div class="container">
 	<div class="getData">
-		<input type="hidden" name="page" id="page" value="${param.page}">
-		<input type="hidden" name="type" id="type" value="${param.type}">
-		<input type="hidden" name="keyword" id="keyword" value="${param.keyword}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+		<input type="hidden" name="page" id="page" value="${param.page}"> 
+		<input type="hidden" name="type" id="type" value="${param.type}"> 
+		<input type="hidden" name="keyword" id="keyword" value="${param.keyword}"> 
+		<input type="hidden" name="writer" id="writer" value="${baord.writer}">
 	</div>
 	<form id="getForm">
 		<input type="hidden" name="bno" value="${board.bno}">
@@ -130,6 +132,7 @@
 			getForm.submit();
 		})
 		$("#getForm .remove").on('click',function(){//삭제처리
+			getForm.append($("#writer"));
 			getForm.attr("method","post");
 			getForm.attr("action","remove");
 			getForm.submit();

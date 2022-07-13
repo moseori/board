@@ -5,6 +5,7 @@
 <sec:authentication property="principal.memberVO" var="memberVO"/>
 <sec:authentication property="principal.username" var="writer"/>
 	<form action="register" method="post" id="registerForm">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		제목 : <input type="text" name="title"><br> 
 		내용 : <textarea rows="10" cols="50" name="contents"></textarea> <br>
 		작성자 : <input type="text" name="writer" readonly="readonly" value="${writer}"> <br>

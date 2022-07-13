@@ -14,7 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import me.light.security.CustomAccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -49,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		CharacterEncodingFilter filter = new CharacterEncodingFilter();
 		filter.setEncoding("utf-8");
 		filter.setForceEncoding(true);
+		http.addFilterBefore(filter, CsrfFilter.class);
 		
 		http.csrf().ignoringAntMatchers("/uploadAjaxAction","/deleteFile");
 		
@@ -67,12 +71,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.rememberMe().key("project")
 			.tokenRepository(persistentTokenRepository)
-			.tokenValiditySeconds(64800);
+			.tokenValiditySeconds(604800);
 		
 		http.logout()
 			.logoutUrl("/customLogout")
 			.invalidateHttpSession(true)
 			.deleteCookies("remember-me","JSESSION_ID");
+		
+		http.exceptionHandling()
+		.accessDeniedHandler(new CustomAccessDeniedHandler());
 	}
 
 }
