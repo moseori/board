@@ -11,6 +11,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,7 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 		return "board/modify";
 	}
-	
+	@PreAuthorize("principal.username == #board.wrirer")
 	@PostMapping("/modify")
 	public String modify(Board board, RedirectAttributes rttr) {
 		service.modify(board);
@@ -61,8 +62,9 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
+	@PreAuthorize("principal.username == #wrirer")
 	@PostMapping("/remove")
-	public String remove(Long bno, RedirectAttributes rttr) {
+	public String remove(Long bno, RedirectAttributes rttr, String writer) {
 		List<BoardAttachVO> attachList=service.getAttachList(bno);
 		deleteFile(attachList);
 		service.remove(bno);
@@ -70,11 +72,13 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public String registerForm() {
 		return "board/register";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String register(Board board, RedirectAttributes rttr) {
 		service.register(board);

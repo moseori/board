@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 <script src="${contextPath}/resources/js/get.js"></script>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="userId" />
+</sec:authorize>
 <div class="container">
 	<div class="getData">
 		<input type="hidden" name="page" id="page" value="${param.page}">
@@ -25,8 +28,10 @@
 			</p>
 			<p>${board.contents}</p>
 		</div>
+		<c:if test="${userId eq board.writer}">
 		<button class="btn btn-warning modify">수정</button>
 		<button class="btn btn-danger remove">삭제</button>
+		</c:if>
 		<button class="btn btn-primary list">목록</button>
 	</form>
 
@@ -48,8 +53,13 @@
 	<div class="oImg"></div>
 
 	<!-- 댓글 등록 -->
+	<sec:authorize access="isAuthenticated()">
 	<button type="button" id="addReplyBtn" class="btn btn-primary"
 		data-toggle="modal" data-target="#replyForm">댓글등록</button>
+</sec:authorize>
+<sec:authorize access="isAnonymous()">
+댓글 등록을 하실려면 로그인 해주세요
+</sec:authorize>
 	<div>댓글수 ${board.replyCnt}</div>
 
 	<div class="row">

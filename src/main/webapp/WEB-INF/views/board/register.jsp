@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
+
 <div class="container">
+<sec:authentication property="principal.memberVO" var="memberVO"/>
+<sec:authentication property="principal.username" var="writer"/>
 	<form action="register" method="post" id="registerForm">
 		제목 : <input type="text" name="title"><br> 
 		내용 : <textarea rows="10" cols="50" name="contents"></textarea> <br>
-		작성자 : <input type="text" name="writer"> <br>
+		작성자 : <input type="text" name="writer" readonly="readonly" value="${writer}"> <br>
 		<button>글쓰기</button>
 	</form>
 

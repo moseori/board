@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		filter.setEncoding("utf-8");
 		filter.setForceEncoding(true);
 		
-		http.csrf().ignoringAntMatchers("/uploadAjaxAction","/deleteFile", "/replies/**");
+		http.csrf().ignoringAntMatchers("/uploadAjaxAction","/deleteFile");
 		
 		http.authorizeRequests()
 			.antMatchers("/security/all").permitAll()
@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.usernameParameter("loginId")
 			.passwordParameter("loginPw")
 			.loginProcessingUrl("/member/login")
-			.successHandler(loginSuccessHandler)
+			//.successHandler(loginSuccessHandler)
 			.failureHandler(failureHandler);
 
 		http.rememberMe().key("project")
