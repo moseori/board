@@ -103,6 +103,8 @@
 	</div>
 </div>
 <script>
+
+
 	$(function() {
 		let getForm = $("#getForm");
 		$('#getForm .list').on('click', function() { //목록

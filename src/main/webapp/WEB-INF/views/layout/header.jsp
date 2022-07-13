@@ -9,7 +9,11 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<script> let contextPath='${contextPath}' </script>
+<script>
+	let contextPath = '${contextPath}'
+	let csrfHeaderName = "${_csrf.headerName}";
+	let csrfTokenName = "${_csrf.token}"
+</script>
 <script src="${contextPath }/resources/js/reply.js"></script>
 <header>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">

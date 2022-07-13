@@ -1,3 +1,6 @@
+console.log(csrfHeaderName)
+console.log(csrfTokenName)
+
 let replyService = (function() {
 
 	function add(reply, callback,error) {
@@ -6,6 +9,9 @@ let replyService = (function() {
 			url: contextPath + "/replies/new",
 			data: JSON.stringify(reply),
 			contentType: 'application/json;charset=utf-8',
+			brforeSend :function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenName);
+			},
 			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
@@ -39,6 +45,9 @@ let replyService = (function() {
 		$.ajax({
 			type: "delete",
 			url: contextPath + "/replies/" + rno,
+			brforeSend :function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenName);
+			},
 			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
@@ -58,6 +67,9 @@ let replyService = (function() {
 			url: contextPath + "/replies/" + reply.rno,
 			data: JSON.stringify(reply),
 			contentType: 'application/json;charset=utf-8',
+			brforeSend :function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenName);
+			},
 			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
