@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -14,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +49,24 @@ public class BoardController {
 	}
 
 	@GetMapping("/get")
-	public String get(Long bno, Model model) {
+	public String get(Long bno, Model model, 
+			@CookieValue(required = false) Cookie viewCount,
+			HttpServletResponse response) {
+		if (viewCount != null) {
+			//이름이 viewCount인 쿠키가 있을때
+			String[] viewed = viewCount.getValue().split("/");
+			List<String> viewedList =Arrays.stream(viewed).collect(Collectors.toList());
+			if (!viewedList.contains(bno.toString())) {
+				viewCount.setValue(viewCount.getValue()+bno+"/");
+				response.addCookie(viewCount);
+			}
+			System.out.println(viewedList.toString());
+		} else {
+			//이름이 viewCount인 쿠키가 없을때
+			Cookie cookie = new Cookie("viewCount", bno+"/");
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
+		}
 		model.addAttribute("board", service.get(bno));
 		return "board/get";
 	}

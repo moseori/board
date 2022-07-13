@@ -29,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public Board get(Long bno) {
-		boardMapper.addViewCount(bno);
+		//boardMapper.addViewCount(bno);
 		return boardMapper.get(bno);
 	}
 
