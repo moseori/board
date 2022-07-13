@@ -9,7 +9,7 @@ import me.light.model.Criteria;
 public interface BoardService {
 	List<Board> getList(Criteria criteria);
 
-	Board get(Long bno);
+	Board get(Long bno, boolean isAddCount);
 
 	void insert(Board board);
 

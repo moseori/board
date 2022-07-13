@@ -3,7 +3,7 @@ console.log(csrfTokenName)
 
 let replyService = (function() {
 
-	function add(reply, callback,error) {
+	function add(reply, callback, error) {
 		$.ajax({
 			type: "post",
 			url: contextPath + "/replies/new",

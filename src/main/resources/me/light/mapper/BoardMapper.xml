@@ -25,6 +25,25 @@
 			</trim>
 		</where>
 	</sql>
+
+	<resultMap type="me.light.model.Board" id="attach_result">
+		<result property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="contents" column="contents" />
+		<result property="writer" column="writer" />
+		<result property="regDate" column="regDate" />
+		<result property="updateDate" column="updateDate" />
+		<result property="replyCnt" column="replyCnt" />
+		<result property="viewCount" column="viewCount" />
+		<collection property="attachList" column="bno" javaType="java.util.ArrayList" 
+		ofType="me.light.model.BoardAttachVO" select="attachList" />
+	</resultMap>
+
+	<select id="attachList" resultType="me.light.model.BoardAttachVO">
+		select * from attach_tbl where bno=#{bno} and fileType='1'
+	</select>
+	
+	
 	<select id="getList" resultType="me.light.model.Board">
 		select * from board_tbl
 		<include refid="search" />

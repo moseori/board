@@ -16,7 +16,6 @@
 	<form id="getForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="bno" value="${board.bno}">
-		<input type="hidden" name="writer" id="writer" value="${board.writer}">
 		<div>
 			<p>${board.title}</p>
 			<p>작성자 : ${board.writer}</p>
@@ -58,12 +57,14 @@
 
 	<!-- 댓글 등록 -->
 	<sec:authorize access="isAuthenticated()">
-	<button type="button" id="addReplyBtn" class="btn btn-primary"
-		data-toggle="modal" data-target="#replyForm">댓글등록</button>
-</sec:authorize>
-<sec:authorize access="isAnonymous()">
-댓글 등록을 하실려면 로그인 해주세요
-</sec:authorize>
+		<button type="button" id="addReplyBtn" class="btn btn-primary"
+			data-toggle="modal" data-target="#replyForm">댓글등록</button>
+	</sec:authorize>
+	
+	<sec:authorize access="isAnonymous()"> 
+	댓글 등록을 하실려면 로그인 해주세요 
+	</sec:authorize>
+	
 	<div>댓글수 ${board.replyCnt}</div>
 
 	<div class="row">
