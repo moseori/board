@@ -11,10 +11,12 @@
 		<input type="hidden" name="page" id="page" value="${param.page}"> 
 		<input type="hidden" name="type" id="type" value="${param.type}"> 
 		<input type="hidden" name="keyword" id="keyword" value="${param.keyword}"> 
-		<input type="hidden" name="writer" id="writer" value="${baord.writer}">
+		<input type="hidden" name="writer" id="writer" value="${board.writer}">
 	</div>
 	<form id="getForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="bno" value="${board.bno}">
+		<input type="hidden" name="writer" id="writer" value="${board.writer}">
 		<div>
 			<p>${board.title}</p>
 			<p>작성자 : ${board.writer}</p>
@@ -115,7 +117,7 @@
 	</div>
 </div>
 <script>
-
+	let writer = $("board.writer");
 
 	$(function() {
 		let getForm = $("#getForm");
@@ -132,7 +134,7 @@
 			getForm.submit();
 		})
 		$("#getForm .remove").on('click',function(){//삭제처리
-			getForm.append($("#writer"));
+			getForm.append(writer);
 			getForm.attr("method","post");
 			getForm.attr("action","remove");
 			getForm.submit();

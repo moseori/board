@@ -24,6 +24,6 @@ public interface BoardService {
 	void register(Board board);
 
 	int totalCount(Criteria criteria);
-
+	
 	List<BoardAttachVO> getAttachList(Long bno);
 }

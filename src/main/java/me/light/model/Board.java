@@ -23,6 +23,7 @@ public class Board {
 	private int replyCnt;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+	private int viewCount;
 	
 	private List<BoardAttachVO> attachList;
 }

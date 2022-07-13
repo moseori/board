@@ -36,6 +36,7 @@
 				<th>작성자</th>
 				<th>등록일</th>
 				<th>수정일</th>
+				<th>조회수</th>
 			</tr>
 			<c:forEach items="${list}" var="b">
 				<tr>
@@ -50,6 +51,7 @@
 						<fmt:parseDate var="updateDate" value="${b.updateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" /> 
 						<fmt:formatDate value="${updateDate}" pattern="yyyy년MM월dd일 HH시mm분" />
 					</td>
+					<td>${b.viewCount}</td>
 				</tr>
 			</c:forEach>
 		</table>

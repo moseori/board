@@ -54,7 +54,7 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 		return "board/modify";
 	}
-	@PreAuthorize("principal.username == #board.writer")
+	@PreAuthorize("isAuthenticated() and principal.username == #board.writer")
 	@PostMapping("/modify")
 	public String modify(Board board, RedirectAttributes rttr) {
 		service.modify(board);
@@ -62,7 +62,7 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	@PreAuthorize("principal.username == #writer")
+	@PreAuthorize("isAuthenticated() and principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr, String writer) {
 		List<BoardAttachVO> attachList=service.getAttachList(bno);
